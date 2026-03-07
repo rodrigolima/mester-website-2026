@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mester — Proposta de Website 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F5F2EC;
+      --white:   #FAFAF8;
+      --text:    #111;
+      --dim:     #6B6760;
+      --muted:   #A09C97;
+      --red:     #C8102E;
+      --border:  rgba(17,17,17,0.1);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Syne', sans-serif;
+      --ease:    cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ──────────────────────────────── */
+    header {
+      padding: 36px 64px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-logo {
+      height: 44px;
+      width: auto;
+      display: block;
+      margin-bottom: 40px;
+    }
+
+    .header-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .header-label::before,
+    .header-label::after {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--red);
+    }
+
+    .header-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 58px);
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .header-title em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .header-sub {
+      font-size: 15px;
+      color: var(--dim);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 52px;
+    }
+
+    /* Version toggle tabs */
+    .tabs {
+      display: flex;
+      gap: 2px;
+      background: rgba(17,17,17,0.08);
+      padding: 4px;
+      border-radius: 2px;
+      margin-bottom: 52px;
+    }
+    .tab {
+      padding: 10px 28px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--sans);
+      transition: all 0.2s var(--ease);
+      border-radius: 1px;
+    }
+    .tab.active {
+      background: var(--text);
+      color: #fff;
+    }
+    .tab:not(.active):hover { color: var(--text); }
+
+    /* ── MAIN CONTENT ────────────────────────── */
+    main {
+      padding: 0 40px 80px;
+    }
+
+    /* Side-by-side view */
+    .side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* Single view */
+    .single-view {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* PREVIEW CARD */
+    .preview-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: box-shadow 0.3s var(--ease);
+    }
+    .preview-card:hover {
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .card-title-group { display: flex; align-items: center; gap: 14px; }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      background: var(--text);
+      color: #fff;
+    }
+    .card-badge.light { background: var(--red); }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .card-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card-actions { display: flex; gap: 8px; }
+
+    .btn-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-open:hover { background: var(--red); }
+    .btn-open svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    .btn-fullscreen {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      color: var(--dim);
+      transition: all 0.2s;
+    }
+    .btn-fullscreen:hover { border-color: var(--text); color: var(--text); }
+    .btn-fullscreen svg { width: 14px; height: 14px; }
+
+    /* Browser chrome mockup */
+    .browser-chrome {
+      background: #E8E5DF;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .browser-dot:nth-child(1) { background: #FF5F57; }
+    .browser-dot:nth-child(2) { background: #FEBC2E; }
+    .browser-dot:nth-child(3) { background: #28C840; }
+
+    .browser-bar {
+      flex: 1;
+      background: rgba(255,255,255,0.7);
+      border-radius: 3px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--sans);
+    }
+
+    /* iframe wrapper */
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      /* Show about 700px of the page scaled down */
+      height: 460px;
+      flex-shrink: 0;
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1440px;
+      height: 900px;
+      border: none;
+      transform-origin: top left;
+    }
+
+    /* Scale calculation: container/iframe width */
+    /* Will be set via JS */
+
+    .iframe-overlay {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Card footer */
+    .card-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+    }
+
+    .card-features {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .feature-pill {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ── FULLSCREEN MODAL ────────────────────── */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.open { display: flex; }
+
+    .modal-inner {
+      width: 92vw;
+      height: 90vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .modal-bar {
+      background: #E8E5DF;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .modal-close {
+      margin-left: auto;
+      width: 32px; height: 32px;
+      background: rgba(0,0,0,0.15);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #333;
+      font-size: 16px;
+      font-weight: 300;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.3); color: #fff; }
+
+    .modal-iframe-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-iframe-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1440px;
+      height: 900px;
+      border: none;
+      transform-origin: top left;
+    }
+
+    /* ── FOOTER ──────────────────────────────── */
+    .page-footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--white);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 900px) {
+      header { padding: 32px 24px 0; }
+      main { padding: 0 16px 60px; }
+      .side-by-side { grid-template-columns: 1fr; }
+      .iframe-wrapper { height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ────────────────────────────────── -->
+  <header>
+    <img src="logo_mester_transparent.png" alt="Mester" class="header-logo">
+    <div class="header-label">Proposta</div>
+    <h1 class="header-title">Website 2026 —<br><em>Duas propostas de layout</em></h1>
+    <p class="header-sub">Apresentamos duas versões da nova homepage. Avalie qual melhor representa a identidade da Mester e nos diga o que achou.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="setView('both')">Ver as duas</button>
+      <button class="tab" onclick="setView('dark')">Versão Escura</button>
+      <button class="tab" onclick="setView('light')">Versão Clara</button>
+    </div>
+  </header>
+
+  <!-- ── MAIN ──────────────────────────────────── -->
+  <main>
+    <div class="side-by-side" id="view-both">
+
+      <!-- VERSÃO ESCURA -->
+      <div class="preview-card" id="card-dark">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge">Versão 1</span>
+            <div>
+              <div class="card-title">Dark Edition</div>
+              <div class="card-desc">Fundo escuro · Cinematográfico · Editorial</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-fullscreen" onclick="openModal('index.html')" title="Ver em tela cheia">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/>
+              </svg>
+            </button>
+            <a href="index.html" target="_blank" class="btn-open">
+              Abrir versão
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 10L10 2M5 2h5v5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+          </div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+
+        <div class="iframe-wrapper" id="wrap-dark">
+          <iframe src="index.html" id="iframe-dark" scrolling="no" title="Versão Escura"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index.html')"></div>
+        </div>
+
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Fundo preto</span>
+            <span class="feature-pill">Grain cinematográfico</span>
+            <span class="feature-pill">Grid assimétrico</span>
+            <span class="feature-pill">Estilo editorial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VERSÃO CLARA -->
+      <div class="preview-card" id="card-light">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge light">Versão 2</span>
+            <div>
+              <div class="card-title">Light Edition</div>
+              <div class="card-desc">Fundo creme · Institucional · Moderno</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-fullscreen" onclick="openModal('index2.html')" title="Ver em tela cheia">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/>
+              </svg>
+            </button>
+            <a href="index2.html" target="_blank" class="btn-open">
+              Abrir versão
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 10L10 2M5 2h5v5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+          </div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+
+        <div class="iframe-wrapper" id="wrap-light">
+          <iframe src="index2.html" id="iframe-light" scrolling="no" title="Versão Clara"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index2.html')"></div>
+        </div>
+
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Fundo creme</span>
+            <span class="feature-pill">Tipografia bold</span>
+            <span class="feature-pill">Estilo Anthropic</span>
+            <span class="feature-pill">Rodapé preto</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /side-by-side -->
+
+    <!-- Single views (hidden by default) -->
+    <div class="single-view" id="view-dark">
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge">Versão 1</span>
+            <div>
+              <div class="card-title">Dark Edition — Cinematográfica</div>
+              <div class="card-desc">Fundo escuro · Grain animado · Editorial</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="index.html" target="_blank" class="btn-open">
+              Abrir em nova aba
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="browser-chrome">
+          <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+        <div class="iframe-wrapper" id="wrap-dark-s" style="height: 580px;">
+          <iframe src="index.html" scrolling="no" title="Versão Escura"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index.html')"></div>
+        </div>
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Fundo preto #080808</span>
+            <span class="feature-pill">Grain cinematográfico</span>
+            <span class="feature-pill">Cormorant + Syne</span>
+            <span class="feature-pill">Grid assimétrico de cases</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-view" id="view-light">
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge light">Versão 2</span>
+            <div>
+              <div class="card-title">Light Edition — Institucional</div>
+              <div class="card-desc">Fundo creme · Moderno · Rodapé preto</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="index2.html" target="_blank" class="btn-open">
+              Abrir em nova aba
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="browser-chrome">
+          <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+        <div class="iframe-wrapper" id="wrap-light-s" style="height: 580px;">
+          <iframe src="index2.html" scrolling="no" title="Versão Clara"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index2.html')"></div>
+        </div>
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Fundo creme #F0EDE7</span>
+            <span class="feature-pill">Herói editorial grid</span>
+            <span class="feature-pill">Dark card embutido</span>
+            <span class="feature-pill">Rodapé preto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── MODAL ──────────────────────────────────── -->
+  <div class="modal" id="modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <div class="modal-bar">
+        <div class="browser-dots">
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+        </div>
+        <div class="browser-bar" id="modal-url">mester.com.br</div>
+        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      </div>
+      <div class="modal-iframe-wrap" id="modal-wrap">
+        <iframe id="modal-iframe" src="" title="Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PAGE FOOTER ────────────────────────────── -->
+  <div class="page-footer">
+    Mester Produções &nbsp;·&nbsp; Proposta Website 2026 &nbsp;·&nbsp; Layout sujeito a ajustes conforme feedback
+  </div>
+
+  <script>
+    // ── Scale iframes to fit their containers ──
+    function scaleIframes() {
+      const pairs = [
+        ['wrap-dark',   'iframe-dark'],
+        ['wrap-light',  'iframe-light'],
+        ['wrap-dark-s', null],
+        ['wrap-light-s', null],
+      ];
+
+      pairs.forEach(([wrapId, iframeId]) => {
+        const wrap = document.getElementById(wrapId);
+        if (!wrap) return;
+        const iframe = iframeId
+          ? document.getElementById(iframeId)
+          : wrap.querySelector('iframe');
+        if (!iframe) return;
+
+        const wrapW = wrap.offsetWidth;
+        const scale = wrapW / 1440;
+        iframe.style.transform = `scale(${scale})`;
+        // Height: scale the 900px source to fill the container
+        wrap.style.height = Math.round(900 * scale) + 'px';
+      });
+
+      // Modal iframe
+      scaleModal();
+    }
+
+    function scaleModal() {
+      const wrap = document.getElementById('modal-wrap');
+      const iframe = document.getElementById('modal-iframe');
+      if (!wrap || !iframe) return;
+      const scale = wrap.offsetWidth / 1440;
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.height = Math.round(wrap.offsetHeight / scale) + 'px';
+    }
+
+    // ── View toggle ──
+    function setView(mode) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      const labels = { both: 'Ver as duas', dark: 'Versão Escura', light: 'Versão Clara' };
+      document.querySelectorAll('.tab').forEach(t => {
+        if (t.textContent.trim() === labels[mode]) t.classList.add('active');
+      });
+
+      document.getElementById('view-both').style.display  = mode === 'both'  ? 'grid'  : 'none';
+      document.getElementById('view-dark').style.display  = mode === 'dark'  ? 'block' : 'none';
+      document.getElementById('view-light').style.display = mode === 'light' ? 'block' : 'none';
+
+      setTimeout(scaleIframes, 50);
+    }
+
+    // ── Modal ──
+    function openModal(src) {
+      const modal = document.getElementById('modal');
+      const iframe = document.getElementById('modal-iframe');
+      document.getElementById('modal-url').textContent = 'mester.com.br — ' + (src.includes('2') ? 'Versão Clara' : 'Versão Escura');
+      iframe.src = src;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(scaleModal, 200);
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal')) closeModalBtn();
+    }
+
+    function closeModalBtn() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('modal-iframe').src = '';
+    }
+
+    // Close with Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModalBtn();
+    });
+
+    // ── Init ──
+    window.addEventListener('load', scaleIframes);
+    window.addEventListener('resize', scaleIframes);
+    setView('both');
+  </script>
+</body>
+</html>
