@@ -123,7 +123,16 @@
       padding: 0 40px 80px;
     }
 
-    /* Side-by-side view */
+    /* Three-up view */
+    .three-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    /* Side-by-side view (kept for single views) */
     .side-by-side {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -376,10 +385,16 @@
     }
 
     /* ── RESPONSIVE ──────────────────────────── */
+    .card-badge.gray { background: #444; }
+
+    @media (max-width: 1200px) {
+      .three-up { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 900px) {
       header { padding: 32px 24px 0; }
       main { padding: 0 16px 60px; }
       .side-by-side { grid-template-columns: 1fr; }
+      .three-up { grid-template-columns: 1fr; }
       .iframe-wrapper { height: 320px; }
     }
   </style>
@@ -390,19 +405,20 @@
   <header>
     <img src="logo_mester_transparent.png" alt="Mester" class="header-logo">
     <div class="header-label">Proposta</div>
-    <h1 class="header-title">Website 2026 —<br><em>Duas propostas de layout</em></h1>
-    <p class="header-sub">Apresentamos duas versões da nova homepage. Avalie qual melhor representa a identidade da Mester e nos diga o que achou.</p>
+    <h1 class="header-title">Website 2026 —<br><em>Três propostas de layout</em></h1>
+    <p class="header-sub">Apresentamos três versões da nova homepage. Avalie qual melhor representa a identidade da Mester e nos diga o que achou.</p>
 
     <div class="tabs">
-      <button class="tab active" onclick="setView('both')">Ver as duas</button>
+      <button class="tab active" onclick="setView('all')">Ver as três</button>
       <button class="tab" onclick="setView('dark')">Versão Escura</button>
       <button class="tab" onclick="setView('light')">Versão Clara</button>
+      <button class="tab" onclick="setView('gray')">Versão Cinzas</button>
     </div>
   </header>
 
   <!-- ── MAIN ──────────────────────────────────── -->
   <main>
-    <div class="side-by-side" id="view-both">
+    <div class="three-up" id="view-all">
 
       <!-- VERSÃO ESCURA -->
       <div class="preview-card" id="card-dark">
@@ -502,7 +518,56 @@
         </div>
       </div>
 
-    </div><!-- /side-by-side -->
+      <!-- VERSÃO CINZAS -->
+      <div class="preview-card" id="card-gray">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge gray">Versão 3</span>
+            <div>
+              <div class="card-title">Gray Edition</div>
+              <div class="card-desc">Transições de cinza · Títulos bold · Contemporâneo</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-fullscreen" onclick="openModal('index3.html')" title="Ver em tela cheia">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/>
+              </svg>
+            </button>
+            <a href="index3.html" target="_blank" class="btn-open">
+              Abrir versão
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 10L10 2M5 2h5v5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+          </div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+
+        <div class="iframe-wrapper" id="wrap-gray">
+          <iframe src="index3.html" id="iframe-gray" scrolling="no" title="Versão Cinzas"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index3.html')"></div>
+        </div>
+
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Transições cinza</span>
+            <span class="feature-pill">Títulos pesados</span>
+            <span class="feature-pill">Branco → cinzas → preto</span>
+            <span class="feature-pill">Rodapé preto</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /three-up -->
 
     <!-- Single views (hidden by default) -->
     <div class="single-view" id="view-dark">
@@ -577,6 +642,42 @@
       </div>
     </div>
 
+    <div class="single-view" id="view-gray">
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-badge gray">Versão 3</span>
+            <div>
+              <div class="card-title">Gray Edition — Contemporânea</div>
+              <div class="card-desc">Transições de cinza · Títulos bold · Rodapé preto</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="index3.html" target="_blank" class="btn-open">
+              Abrir em nova aba
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M5 2h5v5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="browser-chrome">
+          <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+          <div class="browser-bar">mester.com.br</div>
+        </div>
+        <div class="iframe-wrapper" id="wrap-gray-s" style="height: 580px;">
+          <iframe src="index3.html" scrolling="no" title="Versão Cinzas"></iframe>
+          <div class="iframe-overlay" onclick="openModal('index3.html')"></div>
+        </div>
+        <div class="card-footer">
+          <div class="card-features">
+            <span class="feature-pill">Branco → cinza claro → cinza médio</span>
+            <span class="feature-pill">Títulos weight 600</span>
+            <span class="feature-pill">Dark card embutido</span>
+            <span class="feature-pill">Rodapé preto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- ── MODAL ──────────────────────────────────── -->
@@ -608,8 +709,10 @@
       const pairs = [
         ['wrap-dark',   'iframe-dark'],
         ['wrap-light',  'iframe-light'],
+        ['wrap-gray',   'iframe-gray'],
         ['wrap-dark-s', null],
         ['wrap-light-s', null],
+        ['wrap-gray-s', null],
       ];
 
       pairs.forEach(([wrapId, iframeId]) => {
@@ -623,11 +726,9 @@
         const wrapW = wrap.offsetWidth;
         const scale = wrapW / 1440;
         iframe.style.transform = `scale(${scale})`;
-        // Height: scale the 900px source to fill the container
         wrap.style.height = Math.round(900 * scale) + 'px';
       });
 
-      // Modal iframe
       scaleModal();
     }
 
@@ -643,23 +744,25 @@
     // ── View toggle ──
     function setView(mode) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      const labels = { both: 'Ver as duas', dark: 'Versão Escura', light: 'Versão Clara' };
+      const labels = { all: 'Ver as três', dark: 'Versão Escura', light: 'Versão Clara', gray: 'Versão Cinzas' };
       document.querySelectorAll('.tab').forEach(t => {
         if (t.textContent.trim() === labels[mode]) t.classList.add('active');
       });
 
-      document.getElementById('view-both').style.display  = mode === 'both'  ? 'grid'  : 'none';
+      document.getElementById('view-all').style.display   = mode === 'all'   ? 'grid'  : 'none';
       document.getElementById('view-dark').style.display  = mode === 'dark'  ? 'block' : 'none';
       document.getElementById('view-light').style.display = mode === 'light' ? 'block' : 'none';
+      document.getElementById('view-gray').style.display  = mode === 'gray'  ? 'block' : 'none';
 
       setTimeout(scaleIframes, 50);
     }
 
     // ── Modal ──
+    const versionLabels = { 'index.html': 'Versão Escura', 'index2.html': 'Versão Clara', 'index3.html': 'Versão Cinzas' };
     function openModal(src) {
       const modal = document.getElementById('modal');
       const iframe = document.getElementById('modal-iframe');
-      document.getElementById('modal-url').textContent = 'mester.com.br — ' + (src.includes('2') ? 'Versão Clara' : 'Versão Escura');
+      document.getElementById('modal-url').textContent = 'mester.com.br — ' + (versionLabels[src] || src);
       iframe.src = src;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -685,7 +788,7 @@
     // ── Init ──
     window.addEventListener('load', scaleIframes);
     window.addEventListener('resize', scaleIframes);
-    setView('both');
+    setView('all');
   </script>
 </body>
 </html>
