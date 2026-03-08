@@ -144,7 +144,7 @@
     /* Single view */
     .single-view {
       display: none;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -405,14 +405,14 @@
   <header>
     <img src="logo_mester_transparent.png" alt="Mester" class="header-logo">
     <div class="header-label">Proposta</div>
-    <h1 class="header-title">Website 2026 —<br><em>Três propostas de layout</em></h1>
-    <p class="header-sub">Apresentamos três versões da nova homepage. Avalie qual melhor representa a identidade da Mester e nos diga o que achou.</p>
+    <h1 class="header-title">Website 2026 —<br><em>Proposta de layout</em></h1>
+    <p class="header-sub">Apresentamos a proposta de homepage para a Mester. Clique na prévia para explorar em tela cheia ou abra em nova aba.</p>
 
     <div class="tabs">
-      <button class="tab active" onclick="setView('all')">Ver as três</button>
+      <button class="tab active" onclick="setView('gray')">Versão Cinzas</button>
       <button class="tab" onclick="setView('dark')">Versão Escura</button>
       <button class="tab" onclick="setView('light')">Versão Clara</button>
-      <button class="tab" onclick="setView('gray')">Versão Cinzas</button>
+      <button class="tab" onclick="setView('all')">Ver as três</button>
     </div>
   </header>
 
@@ -663,7 +663,7 @@
           <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
           <div class="browser-bar">mester.com.br</div>
         </div>
-        <div class="iframe-wrapper" id="wrap-gray-s" style="height: 580px;">
+        <div class="iframe-wrapper" id="wrap-gray-s" style="height: 680px;">
           <iframe src="index3.html" scrolling="no" title="Versão Cinzas"></iframe>
           <div class="iframe-overlay" onclick="openModal('index3.html')"></div>
         </div>
@@ -788,7 +788,7 @@
     // ── Init ──
     window.addEventListener('load', scaleIframes);
     window.addEventListener('resize', scaleIframes);
-    setView('all');
+    setView('gray');
   </script>
 </body>
 </html>
